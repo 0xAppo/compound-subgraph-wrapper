@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express, { Request, Response, NextFunction } from 'express'
 import expressWs from 'express-ws'
 import bodyParser from 'body-parser'
@@ -115,6 +116,8 @@ const createSchema = async (): Promise<GraphQLSchema> => {
       lifetimeSupplyInterestAccrued: BigDecimal!
       borrowBalanceUnderlying: BigDecimal!
       lifetimeBorrowInterestAccrued: BigDecimal!
+      borrowBalanceETH: BigDecimal!
+      supplyBalanceETH: BigDecimal!
     }
   `
 
@@ -134,6 +137,12 @@ const createSchema = async (): Promise<GraphQLSchema> => {
     bignum(market.collateralFactor)
       .times(market.exchangeRate)
       .times(market.underlyingPrice)
+
+  const supplyBalanceETH = (cToken: any) : BigNumber => 
+    supplyBalanceUnderlying(cToken).times(cToken.market.underlyingPrice)
+
+  const borrowBalanceETH = (cToken: any) : BigNumber => 
+    borrowBalanceUnderlying(cToken).times(cToken.market.underlyingPrice)
 
   const totalCollateralValueInEth = (account: any): BigNumber =>
     account.___tokens.reduce(
@@ -232,6 +241,19 @@ const createSchema = async (): Promise<GraphQLSchema> => {
           resolve: (cToken, _args, _context, _info) => supplyBalanceUnderlying(cToken),
         },
 
+        supplyBalanceETH: {
+          fragment: `
+            ... on AccountCToken {
+              id
+              supplyBalanceUnderlying
+              market {
+                underlyingPrice
+              }
+            }
+          `,
+          resolve: (cToken, _args, _context, _info) => supplyBalanceETH(cToken),
+        },
+
         lifetimeSupplyInterestAccrued: {
           fragment: `
             ... on AccountCToken {
@@ -258,6 +280,19 @@ const createSchema = async (): Promise<GraphQLSchema> => {
             }
           `,
           resolve: (cToken, _args, _context, _info) => borrowBalanceUnderlying(cToken),
+        },
+
+        borrowBalanceETH: {
+          fragment: `
+            ... on AccountCToken {
+              id
+              borrowBalanceUnderlying
+              market {
+                underlyingPrice
+              }
+            }
+          `,
+          resolve: (cToken, _args, _context, _info) => borrowBalanceETH(cToken),
         },
 
         lifetimeBorrowInterestAccrued: {
