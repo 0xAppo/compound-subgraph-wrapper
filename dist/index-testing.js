@@ -20,6 +20,7 @@ const apollo_link_ws_1 = require("apollo-link-ws");
 const apollo_env_1 = require("apollo-env");
 const apollo_utilities_1 = require("apollo-utilities");
 const graphql_tools_1 = require("graphql-tools");
+const bigDecimal = require("bigdecimal");
 /**
  * Logging
  */
@@ -81,21 +82,27 @@ const createSchema = async () => {
     }
   `;
     const bignum = (value) => new bignumber_js_1.default(value);
-    const supplyBalanceUnderlying = (cToken) => bignum(cToken.cTokenBalance).times(cToken.market.exchangeRate);
-    const borrowBalanceUnderlying = (cToken) => bignum(cToken.accountBorrowIndex).eq(bignum('0'))
-        ? bignum('0')
-        : bignum(cToken.storedBorrowBalance)
-            .times(cToken.market.borrowIndex)
-            .dividedBy(cToken.accountBorrowIndex);
-    const tokenInEth = (market) => bignum(market.collateralFactor)
-        .times(market.exchangeRate)
-        .times(market.underlyingPrice);
-    const supplyBalanceETH = (cToken) => supplyBalanceUnderlying(cToken).times(cToken.market.underlyingPrice);
-    const borrowBalanceETH = (cToken) => borrowBalanceUnderlying(cToken).times(cToken.market.underlyingPrice);
-    const totalCollateralValueInEth = (account) => account.___tokens.reduce((acc, token) => acc.plus(tokenInEth(token.market).times(token.cTokenBalance)), bignum('0'));
+    const bigdec = (value) => new bigDecimal(value);
+    const supplyBalanceUnderlying = (cToken) => bigdec(cToken.cTokenBalance).multiply(cToken.market.exchangeRate);
+    const borrowBalanceUnderlying = (cToken) => {
+        if (bigdec(cToken.accountBorrowIndex) == (bigdec('0'))) {
+            return bigdec('0');
+        }
+        else {
+            return bigdec(cToken.storedBorrowBalance)
+                .multiply(cToken.market.borrowIndex)
+                .divide(cToken.accountBorrowIndex, 18);
+        }
+    };
+    const tokenInEth = (market) => bigdec(market.collateralFactor)
+        .multiply(market.exchangeRate)
+        .multiply(market.underlyingPrice);
+    const supplyBalanceETH = (cToken) => supplyBalanceUnderlying(cToken).multiply(cToken.market.underlyingPrice);
+    const borrowBalanceETH = (cToken) => borrowBalanceUnderlying(cToken).multiply(cToken.market.underlyingPrice);
+    const totalCollateralValueInEth = (account) => account.___tokens.reduce((acc, token) => acc.plus(tokenInEth(token.market).multiply(token.cTokenBalance)), bigdec('0'));
     const totalBorrowValueInEth = (account) => !account.hasBorrowed
-        ? bignum('0')
-        : account.___tokens.reduce((acc, token) => acc.plus(bignum(token.market.underlyingPrice).times(borrowBalanceUnderlying(token))), bignum('0'));
+        ? bigdec('0')
+        : account.___tokens.reduce((acc, token) => acc.plus(bigdec(token.market.underlyingPrice).multiply(borrowBalanceUnderlying(token))), bigdec('0'));
     return graphql_tools_1.mergeSchemas({
         schemas: [subgraphSchema, customSchema],
         resolvers: {
@@ -124,9 +131,12 @@ const createSchema = async () => {
                         }
                         else {
                             let totalBorrow = totalBorrowValueInEth(account);
-                            return totalBorrow.eq('0')
-                                ? totalCollateralValueInEth(account)
-                                : totalCollateralValueInEth(account).dividedBy(totalBorrow);
+                            if (totalBorrow == bigdec('0')) {
+                                return totalCollateralValueInEth(account);
+                            }
+                            else {
+                                return totalCollateralValueInEth(account).divide(totalBorrow, 18);
+                            }
                         }
                     },
                 },
@@ -195,8 +205,8 @@ const createSchema = async () => {
             }
           `,
                     resolve: (cToken, _args, _context, _info) => supplyBalanceUnderlying(cToken)
-                        .minus(cToken.totalUnderlyingSupplied)
-                        .plus(cToken.totalUnderlyingRedeemed),
+                        .subtract(cToken.totalUnderlyingSupplied)
+                        .add(cToken.totalUnderlyingRedeemed),
                 },
                 borrowBalanceUnderlying: {
                     fragment: `
@@ -233,8 +243,8 @@ const createSchema = async () => {
             }
           `,
                     resolve: (cToken, _args, _context, _info) => borrowBalanceUnderlying(cToken)
-                        .minus(cToken.totalUnderlyingBorrowed)
-                        .plus(cToken.totalUnderlyingRepaid),
+                        .subtract(cToken.totalUnderlyingBorrowed)
+                        .add(cToken.totalUnderlyingRepaid),
                 },
             },
         },
@@ -309,4 +319,4 @@ const run = async () => {
     }
 };
 run();
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=index-testing.js.map

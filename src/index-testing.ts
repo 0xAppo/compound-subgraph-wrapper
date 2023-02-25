@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express, { Request, Response, NextFunction } from 'express'
 import expressWs from 'express-ws'
 import bodyParser from 'body-parser'
@@ -20,6 +21,7 @@ import {
   makeRemoteExecutableSchema,
   mergeSchemas,
 } from 'graphql-tools'
+import bigDecimal = require('bigdecimal');
 
 /**
  * Logging
@@ -120,42 +122,47 @@ const createSchema = async (): Promise<GraphQLSchema> => {
 
   const bignum = (value: string) => new BigNumber(value)
 
-  const supplyBalanceUnderlying = (cToken: any): BigNumber =>
-    bignum(cToken.cTokenBalance).times(cToken.market.exchangeRate)
+  const bigdec = (value: string) => new bigDecimal(value)
 
-  const borrowBalanceUnderlying = (cToken: any): BigNumber =>
-    bignum(cToken.accountBorrowIndex).eq(bignum('0'))
-      ? bignum('0')
-      : bignum(cToken.storedBorrowBalance)
-          .times(cToken.market.borrowIndex)
-          .dividedBy(cToken.accountBorrowIndex)
+  const supplyBalanceUnderlying = (cToken: any): bigDecimal =>
+    bigdec(cToken.cTokenBalance).multiply(cToken.market.exchangeRate)
 
-  const tokenInEth = (market: any): BigNumber =>
-    bignum(market.collateralFactor)
-      .times(market.exchangeRate)
-      .times(market.underlyingPrice)
+  const borrowBalanceUnderlying = (cToken: any): bigDecimal => {
+    if (bigdec(cToken.accountBorrowIndex)==(bigdec('0'))) {
+      return bigdec('0')
+    } else {
+      return bigdec(cToken.storedBorrowBalance)
+          .multiply(cToken.market.borrowIndex)
+          .divide(cToken.accountBorrowIndex, 18)
+    }
+  }
 
-  const supplyBalanceETH = (cToken: any) : BigNumber => 
-    supplyBalanceUnderlying(cToken).times(cToken.market.underlyingPrice)
+  const tokenInEth = (market: any): bigDecimal =>
+    bigdec(market.collateralFactor)
+      .multiply(market.exchangeRate)
+      .multiply(market.underlyingPrice)
 
-  const borrowBalanceETH = (cToken: any) : BigNumber => 
-    borrowBalanceUnderlying(cToken).times(cToken.market.underlyingPrice)
+  const supplyBalanceETH = (cToken: any) : bigDecimal => 
+    supplyBalanceUnderlying(cToken).multiply(cToken.market.underlyingPrice)
 
-  const totalCollateralValueInEth = (account: any): BigNumber =>
+  const borrowBalanceETH = (cToken: any) : bigDecimal => 
+    borrowBalanceUnderlying(cToken).multiply(cToken.market.underlyingPrice)
+
+  const totalCollateralValueInEth = (account: any): bigDecimal =>
     account.___tokens.reduce(
-      (acc, token) => acc.plus(tokenInEth(token.market).times(token.cTokenBalance)),
-      bignum('0'),
+      (acc, token) => acc.plus(tokenInEth(token.market).multiply(token.cTokenBalance)),
+      bigdec('0'),
     )
 
-  const totalBorrowValueInEth = (account: any): BigNumber =>
+  const totalBorrowValueInEth = (account: any): bigDecimal =>
     !account.hasBorrowed
-      ? bignum('0')
+      ? bigdec('0')
       : account.___tokens.reduce(
           (acc, token) =>
             acc.plus(
-              bignum(token.market.underlyingPrice).times(borrowBalanceUnderlying(token)),
+              bigdec(token.market.underlyingPrice).multiply(borrowBalanceUnderlying(token)),
             ),
-          bignum('0'),
+          bigdec('0'),
         )
 
   return mergeSchemas({
@@ -185,9 +192,11 @@ const createSchema = async (): Promise<GraphQLSchema> => {
               return null
             } else {
               let totalBorrow = totalBorrowValueInEth(account)
-              return totalBorrow.eq('0')
-                ? totalCollateralValueInEth(account)
-                : totalCollateralValueInEth(account).dividedBy(totalBorrow)
+              if(totalBorrow == bigdec('0')) {
+                return totalCollateralValueInEth(account)
+              } else {
+                return totalCollateralValueInEth(account).divide(totalBorrow, 18)
+              }
             }
           },
         },
@@ -263,8 +272,8 @@ const createSchema = async (): Promise<GraphQLSchema> => {
           `,
           resolve: (cToken, _args, _context, _info) =>
             supplyBalanceUnderlying(cToken)
-              .minus(cToken.totalUnderlyingSupplied)
-              .plus(cToken.totalUnderlyingRedeemed),
+              .subtract(cToken.totalUnderlyingSupplied)
+              .add(cToken.totalUnderlyingRedeemed),
         },
 
         borrowBalanceUnderlying: {
@@ -305,8 +314,8 @@ const createSchema = async (): Promise<GraphQLSchema> => {
           `,
           resolve: (cToken, _args, _context, _info) =>
             borrowBalanceUnderlying(cToken)
-              .minus(cToken.totalUnderlyingBorrowed)
-              .plus(cToken.totalUnderlyingRepaid),
+              .subtract(cToken.totalUnderlyingBorrowed)
+              .add(cToken.totalUnderlyingRepaid),
         },
       },
     },

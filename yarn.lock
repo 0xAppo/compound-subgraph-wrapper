@@ -564,6 +564,11 @@
     "mixin-deep" "^1.2.0"
     "pascalcase" "^0.1.1"
 
+"bigdecimal@^0.6.1":
+  "integrity" "sha512-pFxbEwaZRK6XifePcw22DxJkCzCMw3YAossM884Tkvh9QpdWzFBLkgdnjx29yEickWBVYv1F9DdaDxDaF3dzkw=="
+  "resolved" "https://registry.npmjs.org/bigdecimal/-/bigdecimal-0.6.1.tgz"
+  "version" "0.6.1"
+
 "bignumber.js@^9.0.0":
   "integrity" "sha512-t/OYhhJ2SD+YGBQcjY8GzzDHEk9f3nerxjtfa6tlMXfe7frs/WozhvCNoGvpM0P3bNf3Gq5ZRMlGr5f3r4/N8A=="
   "resolved" "https://registry.npmjs.org/bignumber.js/-/bignumber.js-9.0.0.tgz"
@@ -1765,6 +1770,11 @@
   "integrity" "sha512-yynBb1g+RFUPY64fTrFv7nsjRrENBQJaX2UL+2Szc9REFrSNm1rpSXHGzhmAy7a9uv3vlvgBlXnf9RqmPH1/DA=="
   "resolved" "https://registry.npmjs.org/iterall/-/iterall-1.2.2.tgz"
   "version" "1.2.2"
+
+"js-big-decimal@^1.4.1":
+  "integrity" "sha512-lEE6kXojqv1/ky/H0nTTg5gi+1g+V6O94T2GPpZTGayXGeYIC6f6PszckNsEa7S2+qgas9ZOEkONMryxXVKWwQ=="
+  "resolved" "https://registry.npmjs.org/js-big-decimal/-/js-big-decimal-1.4.1.tgz"
+  "version" "1.4.1"
 
 "kind-of@^3.0.2", "kind-of@^3.0.3", "kind-of@^3.2.0":
   "integrity" "sha1-MeohpzS6ubuw8yRm2JOupR5KPGQ="

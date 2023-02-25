@@ -21,6 +21,18 @@
         "version": "9c67dcc7ca897b61f58d57d487bc9f07950546e5ac8701cbc41a8a4fec48b091",
         "signature": "9c67dcc7ca897b61f58d57d487bc9f07950546e5ac8701cbc41a8a4fec48b091"
       },
+      "./node_modules/typescript/lib/lib.es2019.d.ts": {
+        "version": "0fc0f68d3f4d94aa65fab955592e4a9f2066e6f8ee2f66fcc45adf4037fc167b",
+        "signature": "0fc0f68d3f4d94aa65fab955592e4a9f2066e6f8ee2f66fcc45adf4037fc167b"
+      },
+      "./node_modules/typescript/lib/lib.es2020.d.ts": {
+        "version": "2ac4bcb126505649675d586f7c186a5278a8ef3f0dad29475c512e56c007a0c5",
+        "signature": "2ac4bcb126505649675d586f7c186a5278a8ef3f0dad29475c512e56c007a0c5"
+      },
+      "./node_modules/typescript/lib/lib.esnext.d.ts": {
+        "version": "1c05c805f62c1c06a60b7812cd8de2dff7a5bda2218ce5edda5d9d298b1c48e1",
+        "signature": "1c05c805f62c1c06a60b7812cd8de2dff7a5bda2218ce5edda5d9d298b1c48e1"
+      },
       "./node_modules/typescript/lib/lib.dom.d.ts": {
         "version": "2d53f3741e5a4f78a90f623387d71a1cc809bb258f10cdaec034b67cbf71022f",
         "signature": "2d53f3741e5a4f78a90f623387d71a1cc809bb258f10cdaec034b67cbf71022f"
@@ -108,6 +120,26 @@
       "./node_modules/typescript/lib/lib.es2019.array.d.ts": {
         "version": "fc7c02b980e7dda0ed14d57ee71705c09efc51ec6286a10b971a25a3bb29262b",
         "signature": "fc7c02b980e7dda0ed14d57ee71705c09efc51ec6286a10b971a25a3bb29262b"
+      },
+      "./node_modules/typescript/lib/lib.es2019.object.d.ts": {
+        "version": "989b95205f1189943fab0ce12a39c80570edf8f200aca60e0fdc500afc4d5859",
+        "signature": "989b95205f1189943fab0ce12a39c80570edf8f200aca60e0fdc500afc4d5859"
+      },
+      "./node_modules/typescript/lib/lib.es2019.string.d.ts": {
+        "version": "9a13dd96b56e11eb3b170b9dbdb2e6b323b0023e9a0a275554f1116c1a0b2658",
+        "signature": "9a13dd96b56e11eb3b170b9dbdb2e6b323b0023e9a0a275554f1116c1a0b2658"
+      },
+      "./node_modules/typescript/lib/lib.es2019.symbol.d.ts": {
+        "version": "7a842c21e0fe143eb3ad4d689a1470bab5ed9bc7fd7223fe8b56cbae27038d62",
+        "signature": "7a842c21e0fe143eb3ad4d689a1470bab5ed9bc7fd7223fe8b56cbae27038d62"
+      },
+      "./node_modules/typescript/lib/lib.es2020.string.d.ts": {
+        "version": "423fc513ff374d43d9d1b6638e56c2f94bd4808918c4f8c46863ecc1a0bdc80b",
+        "signature": "423fc513ff374d43d9d1b6638e56c2f94bd4808918c4f8c46863ecc1a0bdc80b"
+      },
+      "./node_modules/typescript/lib/lib.es2020.symbol.wellknown.d.ts": {
+        "version": "2088daed2bf4392d3ab0593206282f0f26f0294ff49099c6b9ff1faa8e732ca4",
+        "signature": "2088daed2bf4392d3ab0593206282f0f26f0294ff49099c6b9ff1faa8e732ca4"
       },
       "./node_modules/typescript/lib/lib.esnext.intl.d.ts": {
         "version": "f6e0c89daaf72eac38dfb1d5ef0972183f7f26a68da15bfe5bcb7cfccf0c7db8",
@@ -1321,8 +1353,16 @@
         "version": "f59c85afb0c9698e5df6bc0d2276ba3385f491f72611ea4d2f512ca3e82679a7",
         "signature": "f59c85afb0c9698e5df6bc0d2276ba3385f491f72611ea4d2f512ca3e82679a7"
       },
+      "./src/index-local.ts": {
+        "version": "c42b05d7dec208924e2b19fef62cea0ef4464441619dd6c9cb3892cf7a24e8cf",
+        "signature": "5c9cd8ba4f81982e8002c709ba0f6675b7aaf1def7f8a98a9996040a3e1c2bc0"
+      },
+      "./src/index-testing.ts": {
+        "version": "116fa2912c89e980734dec60b22c94648a94b89a82c8cbd6b8708b8a7bcdf927",
+        "signature": "5c9cd8ba4f81982e8002c709ba0f6675b7aaf1def7f8a98a9996040a3e1c2bc0"
+      },
       "./src/index.ts": {
-        "version": "b647ed1b58efee6cd54b38734a83e2f01c4ff761bd107d4168f34721a9173b6e",
+        "version": "c42b05d7dec208924e2b19fef62cea0ef4464441619dd6c9cb3892cf7a24e8cf",
         "signature": "5c9cd8ba4f81982e8002c709ba0f6675b7aaf1def7f8a98a9996040a3e1c2bc0"
       },
       "./node_modules/@types/long/index.d.ts": {
@@ -1333,7 +1373,7 @@
     "options": {
       "rootDir": "./src",
       "outDir": "./dist",
-      "target": 2,
+      "target": 99,
       "module": 1,
       "declaration": true,
       "sourceMap": true,
@@ -1342,7 +1382,8 @@
       "composite": true,
       "noImplicitAny": false,
       "lib": [
-        "lib.es2015.d.ts",
+        "lib.es2020.d.ts",
+        "lib.esnext.d.ts",
         "lib.es2015.d.ts",
         "lib.es2018.asynciterable.d.ts",
         "lib.dom.d.ts"
@@ -1367,6 +1408,18 @@
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "./node_modules/typescript/lib/lib.es2018.d.ts": [
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/typescript/lib/lib.es2019.d.ts": [
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/typescript/lib/lib.es2020.d.ts": [
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/typescript/lib/lib.esnext.d.ts": [
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -1455,6 +1508,26 @@
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "./node_modules/typescript/lib/lib.es2019.array.d.ts": [
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/typescript/lib/lib.es2019.object.d.ts": [
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/typescript/lib/lib.es2019.string.d.ts": [
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/typescript/lib/lib.es2019.symbol.d.ts": [
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/typescript/lib/lib.es2020.string.d.ts": [
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/typescript/lib/lib.es2020.symbol.wellknown.d.ts": [
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -3462,6 +3535,48 @@
       ],
       "./node_modules/apollo-link-ws/lib/index.d.ts": [
         "./node_modules/apollo-link-ws/lib/websocketlink.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./src/index-local.ts": [
+        "./node_modules/dotenv/config.d.ts",
+        "./node_modules/@types/express/index.d.ts",
+        "./node_modules/@types/body-parser/index.d.ts",
+        "./node_modules/winston/index.d.ts",
+        "./node_modules/express-winston/index.d.ts",
+        "./node_modules/@types/node/http.d.ts",
+        "./node_modules/@types/ws/index.d.ts",
+        "./node_modules/bignumber.js/bignumber.d.ts",
+        "./node_modules/subscriptions-transport-ws/dist/index.d.ts",
+        "./node_modules/apollo-server-express/dist/index.d.ts",
+        "./node_modules/apollo-link/lib/index.d.ts",
+        "./node_modules/apollo-link-http/lib/index.d.ts",
+        "./node_modules/apollo-link-ws/lib/index.d.ts",
+        "./node_modules/apollo-env/lib/index.d.ts",
+        "./node_modules/apollo-utilities/lib/index.d.ts",
+        "./node_modules/graphql/index.d.ts",
+        "./node_modules/graphql-tools/dist/index.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./src/index-testing.ts": [
+        "./node_modules/dotenv/config.d.ts",
+        "./node_modules/@types/express/index.d.ts",
+        "./node_modules/@types/body-parser/index.d.ts",
+        "./node_modules/winston/index.d.ts",
+        "./node_modules/express-winston/index.d.ts",
+        "./node_modules/@types/node/http.d.ts",
+        "./node_modules/@types/ws/index.d.ts",
+        "./node_modules/bignumber.js/bignumber.d.ts",
+        "./node_modules/subscriptions-transport-ws/dist/index.d.ts",
+        "./node_modules/apollo-server-express/dist/index.d.ts",
+        "./node_modules/apollo-link/lib/index.d.ts",
+        "./node_modules/apollo-link-http/lib/index.d.ts",
+        "./node_modules/apollo-link-ws/lib/index.d.ts",
+        "./node_modules/apollo-env/lib/index.d.ts",
+        "./node_modules/apollo-utilities/lib/index.d.ts",
+        "./node_modules/graphql/index.d.ts",
+        "./node_modules/graphql-tools/dist/index.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -3512,6 +3627,18 @@
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "./node_modules/typescript/lib/lib.es2019.d.ts": [
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/typescript/lib/lib.es2020.d.ts": [
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/typescript/lib/lib.esnext.d.ts": [
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "./node_modules/typescript/lib/lib.dom.d.ts": [
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
@@ -3597,6 +3724,26 @@
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "./node_modules/typescript/lib/lib.es2019.array.d.ts": [
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/typescript/lib/lib.es2019.object.d.ts": [
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/typescript/lib/lib.es2019.string.d.ts": [
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/typescript/lib/lib.es2019.symbol.d.ts": [
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/typescript/lib/lib.es2020.string.d.ts": [
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/typescript/lib/lib.es2020.symbol.wellknown.d.ts": [
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -5607,12 +5754,15 @@
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "./src/index.ts": [
+      "./src/index-testing.ts": [
         "./node_modules/dotenv/config.d.ts"
       ],
       "./node_modules/@types/long/index.d.ts": [
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./src/index-local.ts": [
+        "./node_modules/dotenv/config.d.ts"
       ]
     },
     "semanticDiagnosticsPerFile": [
@@ -5621,6 +5771,9 @@
       "./node_modules/typescript/lib/lib.es2016.d.ts",
       "./node_modules/typescript/lib/lib.es2017.d.ts",
       "./node_modules/typescript/lib/lib.es2018.d.ts",
+      "./node_modules/typescript/lib/lib.es2019.d.ts",
+      "./node_modules/typescript/lib/lib.es2020.d.ts",
+      "./node_modules/typescript/lib/lib.esnext.d.ts",
       "./node_modules/typescript/lib/lib.dom.d.ts",
       "./node_modules/typescript/lib/lib.es2015.core.d.ts",
       "./node_modules/typescript/lib/lib.es2015.collection.d.ts",
@@ -5643,6 +5796,11 @@
       "./node_modules/typescript/lib/lib.es2018.promise.d.ts",
       "./node_modules/typescript/lib/lib.es2018.regexp.d.ts",
       "./node_modules/typescript/lib/lib.es2019.array.d.ts",
+      "./node_modules/typescript/lib/lib.es2019.object.d.ts",
+      "./node_modules/typescript/lib/lib.es2019.string.d.ts",
+      "./node_modules/typescript/lib/lib.es2019.symbol.d.ts",
+      "./node_modules/typescript/lib/lib.es2020.string.d.ts",
+      "./node_modules/typescript/lib/lib.es2020.symbol.wellknown.d.ts",
       "./node_modules/typescript/lib/lib.esnext.intl.d.ts",
       "./node_modules/typescript/lib/lib.esnext.bigint.d.ts",
       "./node_modules/dotenv/config.d.ts",
@@ -5946,8 +6104,10 @@
       "./node_modules/apollo-link-http/lib/index.d.ts",
       "./node_modules/apollo-link-ws/lib/websocketlink.d.ts",
       "./node_modules/apollo-link-ws/lib/index.d.ts",
+      "./src/index-testing.ts",
+      "./src/index.ts",
       "./node_modules/@types/long/index.d.ts",
-      "./src/index.ts"
+      "./src/index-local.ts"
     ]
   },
   "version": "3.6.3"

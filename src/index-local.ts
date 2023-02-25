@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express, { Request, Response, NextFunction } from 'express'
 import expressWs from 'express-ws'
 import bodyParser from 'body-parser'

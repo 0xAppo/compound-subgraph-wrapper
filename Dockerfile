@@ -1,4 +1,4 @@
-FROM node:10
+FROM node:16
 
 # Add the repository sources to the image
 COPY . /compound-subgraph-wrapper
