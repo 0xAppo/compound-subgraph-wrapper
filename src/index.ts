@@ -107,6 +107,7 @@ const createSchema = async (): Promise<GraphQLSchema> => {
     extend type Account {
       totalBorrowValueInEth: BigDecimal!
       totalCollateralValueInEth: BigDecimal!
+      health: BigDecimal!
     }
 
     extend type AccountCToken {
