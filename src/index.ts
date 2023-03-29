@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express, { Request, Response, NextFunction } from 'express'
 import expressWs from 'express-ws'
 import bodyParser from 'body-parser'
@@ -107,7 +108,7 @@ const createSchema = async (): Promise<GraphQLSchema> => {
     extend type Account {
       totalBorrowValueInEth: BigDecimal!
       totalCollateralValueInEth: BigDecimal!
-      health: BigDecimal!
+      health: BigDecimal
     }
 
     extend type AccountCToken {
@@ -125,11 +126,7 @@ const createSchema = async (): Promise<GraphQLSchema> => {
     bignum(cToken.cTokenBalance).times(cToken.market.exchangeRate)
 
   const borrowBalanceUnderlying = (cToken: any): BigNumber =>
-    bignum(cToken.accountBorrowIndex).eq(bignum('0'))
-      ? bignum('0')
-      : bignum(cToken.storedBorrowBalance)
-          .times(cToken.market.borrowIndex)
-          .dividedBy(cToken.accountBorrowIndex)
+    bignum(cToken.storedBorrowBalance)
 
   const tokenInEth = (market: any): BigNumber =>
     bignum(market.collateralFactor)

@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -52,9 +61,9 @@ const createQueryNodeHttpLink = () => new apollo_link_http_1.HttpLink({
     uri: SUBGRAPH_QUERY_ENDPOINT,
     fetch: apollo_env_1.fetch,
 });
-const createSchema = async () => {
+const createSchema = () => __awaiter(void 0, void 0, void 0, function* () {
     let httpLink = createQueryNodeHttpLink();
-    let remoteSchema = await graphql_tools_1.introspectSchema(httpLink);
+    let remoteSchema = yield graphql_tools_1.introspectSchema(httpLink);
     const subscriptionClient = new subscriptions_transport_ws_1.SubscriptionClient(SUBGRAPH_SUBSCRIPTION_ENDPOINT, {
         reconnect: true,
     }, ws_1.default);
@@ -249,12 +258,12 @@ const createSchema = async () => {
             },
         },
     });
-};
+});
 /**
  * Server application
  */
 // Define the middleware
-const rejectBadHeaders = async (req, res, next) => {
+const rejectBadHeaders = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     if (req.headers['challenge-bypass-token'] ||
         req.headers['x_proxy_id']
     // Note: This one doesn't work on Google Cloud:
@@ -265,8 +274,8 @@ const rejectBadHeaders = async (req, res, next) => {
     else {
         next();
     }
-};
-const run = async () => {
+});
+const run = () => __awaiter(void 0, void 0, void 0, function* () {
     logger.info(`Create application`);
     const { app } = express_ws_1.default(express_1.default());
     app.use(rejectBadHeaders);
@@ -286,14 +295,14 @@ const run = async () => {
         subscriptions: {
             path: '/',
         },
-        schema: await createSchema(),
+        schema: yield createSchema(),
         introspection: true,
         playground: true,
-        context: async ({ req }) => {
+        context: ({ req }) => __awaiter(void 0, void 0, void 0, function* () {
             return {
                 logger: logger.child({ component: 'ApolloServer' }),
             };
-        },
+        }),
     });
     logger.info(`Install GraphQL request handlers`);
     apolloServer.applyMiddleware({
@@ -309,7 +318,7 @@ const run = async () => {
     apolloServer.installSubscriptionHandlers(server);
     logger.info(`Start server`);
     try {
-        await server.listen(9500, () => {
+        yield server.listen(9500, () => {
             logger.info('Listening on port 9500');
         });
     }
@@ -317,6 +326,6 @@ const run = async () => {
         logger.error(`Server crashed:`, e);
         process.exitCode = 1;
     }
-};
+});
 run();
 //# sourceMappingURL=index-testing.js.map
