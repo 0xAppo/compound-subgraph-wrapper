@@ -1,0 +1,8 @@
+version: '3'
+services:
+  circulatingsupply:
+    image: lodestar-subgraph-wrapper:latest
+    build: .
+    entrypoint: node dist/index.js
+    restart: always
+    network_mode: host
