@@ -1330,7 +1330,7 @@
         "signature": "5c9cd8ba4f81982e8002c709ba0f6675b7aaf1def7f8a98a9996040a3e1c2bc0"
       },
       "./src/index.ts": {
-        "version": "966af798655928f5ca21d0750a68ca12b4b94980fa29d65ae59ba6badeb41697",
+        "version": "c2441d851a44b5a695a353aaf38a3cc839313b80a161f0b5929a987cd5b7e69d",
         "signature": "5c9cd8ba4f81982e8002c709ba0f6675b7aaf1def7f8a98a9996040a3e1c2bc0"
       },
       "./node_modules/@types/long/index.d.ts": {
