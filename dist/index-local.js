@@ -79,6 +79,7 @@ const createSchema = () => __awaiter(void 0, void 0, void 0, function* () {
     extend type Account {
       totalBorrowValueInEth: BigDecimal!
       totalCollateralValueInEth: BigDecimal!
+      health: BigDecimal!
     }
 
     extend type AccountCToken {

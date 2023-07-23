@@ -1322,15 +1322,15 @@
         "signature": "f59c85afb0c9698e5df6bc0d2276ba3385f491f72611ea4d2f512ca3e82679a7"
       },
       "./src/index-local.ts": {
-        "version": "c42b05d7dec208924e2b19fef62cea0ef4464441619dd6c9cb3892cf7a24e8cf",
+        "version": "edda6cb5c030b50ca1e838b1a3a55ea89b3997e97787203a3969beafc63a28f7",
         "signature": "5c9cd8ba4f81982e8002c709ba0f6675b7aaf1def7f8a98a9996040a3e1c2bc0"
       },
       "./src/index-testing.ts": {
-        "version": "116fa2912c89e980734dec60b22c94648a94b89a82c8cbd6b8708b8a7bcdf927",
+        "version": "5f6dd0d9c591fa1a1657603a3c4d9edcae05752d19ffbe02370a5031c5390a19",
         "signature": "5c9cd8ba4f81982e8002c709ba0f6675b7aaf1def7f8a98a9996040a3e1c2bc0"
       },
       "./src/index.ts": {
-        "version": "c2441d851a44b5a695a353aaf38a3cc839313b80a161f0b5929a987cd5b7e69d",
+        "version": "966af798655928f5ca21d0750a68ca12b4b94980fa29d65ae59ba6badeb41697",
         "signature": "5c9cd8ba4f81982e8002c709ba0f6675b7aaf1def7f8a98a9996040a3e1c2bc0"
       },
       "./node_modules/@types/long/index.d.ts": {
@@ -6004,8 +6004,8 @@
       "./node_modules/apollo-link-ws/lib/index.d.ts",
       "./src/index-local.ts",
       "./src/index-testing.ts",
-      "./node_modules/@types/long/index.d.ts",
-      "./src/index.ts"
+      "./src/index.ts",
+      "./node_modules/@types/long/index.d.ts"
     ]
   },
   "version": "3.6.3"
