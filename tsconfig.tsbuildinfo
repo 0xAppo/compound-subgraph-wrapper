@@ -1330,7 +1330,7 @@
         "signature": "5c9cd8ba4f81982e8002c709ba0f6675b7aaf1def7f8a98a9996040a3e1c2bc0"
       },
       "./src/index.ts": {
-        "version": "72ef67be862bdaccc6c2cca61ef82e24aa9902862fc65faa8f6623864c1bdb0d",
+        "version": "966af798655928f5ca21d0750a68ca12b4b94980fa29d65ae59ba6badeb41697",
         "signature": "5c9cd8ba4f81982e8002c709ba0f6675b7aaf1def7f8a98a9996040a3e1c2bc0"
       },
       "./node_modules/@types/long/index.d.ts": {
@@ -6004,8 +6004,8 @@
       "./node_modules/apollo-link-ws/lib/index.d.ts",
       "./src/index-local.ts",
       "./src/index-testing.ts",
-      "./src/index.ts",
-      "./node_modules/@types/long/index.d.ts"
+      "./node_modules/@types/long/index.d.ts",
+      "./src/index.ts"
     ]
   },
   "version": "3.6.3"
